@@ -1,20 +1,22 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
 
-export const Tag = sequelize.define("Tag", {
+export const Article = sequelize.define("Article", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  name: {
+  title: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+  },
+  content: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
 });
-
-// Relaciones
-
-User.hasMany(Article, { foreignKey: "user_id", as: "articles" });
-Article.belongsTo(User, { foreignKey: "user_id", as: "author" });

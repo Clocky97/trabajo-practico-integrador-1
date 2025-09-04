@@ -14,7 +14,3 @@ export const Tag = sequelize.define("Tag", {
   },
 });
 
-// Relaciones
-
-User.hasMany(Article, { foreignKey: "user_id", as: "articles" });
-Article.belongsTo(User, { foreignKey: "user_id", as: "author" });

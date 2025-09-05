@@ -1,12 +1,29 @@
 import { Router } from "express";
-import { getProfile, updateProfile } from "../controllers/profile.controller.js";
+import {
+  createProfile,
+  getProfiles,
+  getProfileById,
+  updateProfile,
+  deleteProfile,
+} from "../controllers/profile.controller.js";
 import { profileValidator } from "../middlewares/profile.validator.js";
-import { validateRequest } from "../middlewares/validate.request.js";
-import { authMiddleware } from "../middlewares/auth.middleware.js";
+import { validationResult } from "express-validator";
 
 const router = Router();
 
-router.get("/", authMiddleware, getProfile);
-router.put("/", authMiddleware, profileValidator, validateRequest, updateProfile);
+// Middleware para manejar los errores de validación
+const handleValidation = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+  next();
+};
+
+router.post("/", profileValidator, handleValidation, createProfile);
+router.get("/", getProfiles);
+router.get("/:id", getProfileById);
+router.put("/:id", profileValidator, handleValidation, updateProfile);
+router.delete("/:id", deleteProfile);
 
 export default router;

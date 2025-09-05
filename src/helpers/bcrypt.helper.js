@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt";
 
+// Función para hashear
+
 export const hashPassword = async (plainPassword) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(plainPassword, salt);

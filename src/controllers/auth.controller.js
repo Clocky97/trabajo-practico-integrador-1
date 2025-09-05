@@ -2,6 +2,8 @@ import { User } from "../models/user.model.js";
 import { hashPassword, comparePassword } from "../helpers/bcrypt.helper.js";
 import { generateToken } from "../helpers/jwt.helper.js";
 
+// Registro
+
 export const register = async (req, res) => {
   try {
     const { username, email, password, role } = req.body;
@@ -12,6 +14,8 @@ export const register = async (req, res) => {
     res.status(500).json({ message: "Error al registrar usuario", error });
   }
 };
+
+// Login
 
 export const login = async (req, res) => {
   try {
@@ -36,6 +40,8 @@ export const login = async (req, res) => {
     res.status(500).json({ message: "Error al iniciar sesión", error });
   }
 };
+
+// Logout
 
 export const logout = async (req, res) => {
   try {

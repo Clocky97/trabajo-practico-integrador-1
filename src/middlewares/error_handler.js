@@ -5,3 +5,4 @@ export const errorHandler = (err, req, res, next) => {
     error: process.env.NODE_ENV === "development" ? err : {},
   });
 };
+// Middleware de manejo de errores

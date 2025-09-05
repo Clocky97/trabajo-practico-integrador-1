@@ -1,5 +1,7 @@
 import { body } from "express-validator";
 
+// Validadores para el registro
+
 export const registerValidator = [
   body("username")
     .notEmpty().withMessage("El nombre de usuario es obligatorio")
@@ -17,6 +19,8 @@ export const registerValidator = [
     .optional()
     .isIn(["user", "admin"]).withMessage("El rol debe ser 'user' o 'admin'"),
 ];
+
+// Validadores para el login
 
 export const loginValidator = [
   body("email")

@@ -1,6 +1,8 @@
 import { Tag } from "../models/tag.model.js";
 import { Article } from "../models/article.model.js";
 
+// Obtener todas las etiquetas
+
 export const getAllTags = async (req, res) => {
   try {
     const tags = await Tag.findAll();
@@ -9,6 +11,8 @@ export const getAllTags = async (req, res) => {
     res.status(500).json({ message: "Error al obtener etiquetas", error });
   }
 };
+
+// Obtener una etiqueta por ID
 
 export const getTagById = async (req, res) => {
   try {
@@ -25,6 +29,8 @@ export const getTagById = async (req, res) => {
   }
 };
 
+// Crear una nueva etiqueta
+
 export const createTag = async (req, res) => {
   try {
     const { name } = req.body;
@@ -34,6 +40,8 @@ export const createTag = async (req, res) => {
     res.status(500).json({ message: "Error al crear la etiqueta", error });
   }
 };
+
+// Actualizar una etiqueta existente
 
 export const updateTag = async (req, res) => {
   try {
@@ -50,6 +58,8 @@ export const updateTag = async (req, res) => {
     res.status(500).json({ message: "Error al actualizar la etiqueta", error });
   }
 };
+
+// Eliminar una etiqueta
 
 export const deleteTag = async (req, res) => {
   try {

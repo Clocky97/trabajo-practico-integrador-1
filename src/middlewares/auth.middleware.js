@@ -2,6 +2,8 @@ import { verifyToken } from "../helpers/jwt.helper.js";
 import { User } from "../models/user.model.js";
 import { Article } from "../models/article.model.js";
 
+// Middleware de autenticación y autorización
+
 export const authMiddleware = async (req, res, next) => {
   try {
     const token = req.cookies.token;
@@ -19,6 +21,8 @@ export const authMiddleware = async (req, res, next) => {
     return res.status(401).json({ message: "Token inválido o expirado" });
   }
 };
+
+// Middleware para roles
 
 export const adminMiddleware = (req, res, next) => {
   if (req.user && req.user.role === "admin") {

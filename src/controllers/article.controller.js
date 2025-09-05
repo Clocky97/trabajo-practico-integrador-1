@@ -1,10 +1,12 @@
 import { Article } from "../models/article.model.js";
-import { Tag } from "../models/tag.model.js";
+import { User } from "../models/user.model.js";
+
+// Obtener todos los artículos
 
 export const getAllArticles = async (req, res) => {
   try {
     const articles = await Article.findAll({
-      include: [{ model: Tag, as: "tags" }],
+      include: [{ model: User, as: "author" }],
     });
     res.status(200).json(articles);
   } catch (error) {
@@ -12,11 +14,13 @@ export const getAllArticles = async (req, res) => {
   }
 };
 
+// Obtener un artículo por ID
+
 export const getArticleById = async (req, res) => {
   try {
     const { id } = req.params;
     const article = await Article.findByPk(id, {
-      include: [{ model: Tag, as: "tags" }],
+      include: [{ model: User, as: "author" }],
     });
     if (!article) {
       return res.status(404).json({ message: "Artículo no encontrado" });
@@ -27,6 +31,8 @@ export const getArticleById = async (req, res) => {
   }
 };
 
+// Crear un nuevo artículo
+
 export const createArticle = async (req, res) => {
   try {
     const { title, content, user_id } = req.body;
@@ -36,6 +42,8 @@ export const createArticle = async (req, res) => {
     res.status(500).json({ message: "Error al crear el artículo", error });
   }
 };
+
+// Actualizar un artículo existente
 
 export const updateArticle = async (req, res) => {
   try {
@@ -53,6 +61,8 @@ export const updateArticle = async (req, res) => {
     res.status(500).json({ message: "Error al actualizar el artículo", error });
   }
 };
+
+// Eliminar un artículo
 
 export const deleteArticle = async (req, res) => {
   try {

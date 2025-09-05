@@ -1,6 +1,8 @@
 import { User } from "../models/user.model.js";
 import { Article } from "../models/article.model.js";
 
+// Obtener todos los usuarios
+
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll({
@@ -11,6 +13,8 @@ export const getAllUsers = async (req, res) => {
     res.status(500).json({ message: "Error al obtener usuarios", error });
   }
 };
+
+// Obtener un usuario por ID
 
 export const getUserById = async (req, res) => {
   try {
@@ -27,6 +31,8 @@ export const getUserById = async (req, res) => {
   }
 };
 
+// Crear un nuevo usuario
+
 export const createUser = async (req, res) => {
   try {
     const { username, email, password, role } = req.body;
@@ -36,6 +42,8 @@ export const createUser = async (req, res) => {
     res.status(500).json({ message: "Error al crear el usuario", error });
   }
 };
+
+// Actualizar un usuario existente
 
 export const updateUser = async (req, res) => {
   try {
@@ -54,6 +62,8 @@ export const updateUser = async (req, res) => {
     res.status(500).json({ message: "Error al actualizar el usuario", error });
   }
 };
+
+// Eliminar un usuario
 
 export const deleteUser = async (req, res) => {
   try {
